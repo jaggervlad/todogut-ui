@@ -11,6 +11,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Alert from '@material-ui/lab/Alert';
 import { ORDERS_DISPATCHED } from '@/graphql/orders';
 import CustomTableDispatched from './CustomTableDispatched';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
 export default function ListOrderDispatched() {
   const { data, loading, error } = useQuery(ORDERS_DISPATCHED);
@@ -53,7 +54,7 @@ export default function ListOrderDispatched() {
               style={{ marginRight: '5px' }}
               onClick={() => router.push('/orderspaid')}
             >
-              Pedidos Pagados
+              <MonetizationOnIcon />
             </Button>
           </Grid>
 

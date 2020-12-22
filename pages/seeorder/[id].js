@@ -46,6 +46,7 @@ export default function seeorder() {
     total,
     vendedor,
     costEnv,
+    descuento,
   } = data.obtenerPedido;
   const { mail, nombre, telefono } = cliente;
   const { nombre: vendedorNombre } = vendedor;
@@ -128,6 +129,12 @@ export default function seeorder() {
                   {costEnv && (
                     <Typography variant="body1">
                       Costo de Envio <span>$ {costEnv}</span>
+                    </Typography>
+                  )}
+
+                  {descuento && (
+                    <Typography variant="body1">
+                      Descuento <span>$ {descuento}</span>
                     </Typography>
                   )}
 
