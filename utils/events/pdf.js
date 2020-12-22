@@ -2,7 +2,7 @@ import Swal from 'sweetalert2';
 
 export const handleShippingOrder = (id, e) => {
   e.preventDefault();
-  fetch(`http://localhost:4000/pedidos/envios/${id}`, {
+  fetch(`https://todogut-api.herokuapp.com/pedidos/envios/${id}`, {
     method: 'GET',
   })
     .then((res) => res.blob())
@@ -19,7 +19,7 @@ export const handleShippingOrder = (id, e) => {
 
 export const handlePdf = (id, e) => {
   e.preventDefault();
-  fetch(`http://localhost:4000/pedidos/htmlPdf/${id}`, {
+  fetch(`https://todogut-api.herokuapp.com/pedidos/htmlPdf/${id}`, {
     method: 'GET',
   })
     .then((res) => res.blob())
