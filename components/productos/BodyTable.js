@@ -10,7 +10,7 @@ import { DELETE_PRODUCT, ALL_PRODUCTS } from '@/graphql/products';
 import Link from 'next/link';
 
 export default function BodyTable({ product }) {
-  const { id, nombre, precio, existencia, categoria, marca } = product;
+  const { id, nombre, precio, existencia, categoria, presentacion } = product;
   const [eliminarProducto] = useMutation(DELETE_PRODUCT, {
     update(cache) {
       const { allProducts } = cache.readQuery({ query: ALL_PRODUCTS });
@@ -49,10 +49,10 @@ export default function BodyTable({ product }) {
   return (
     <StyledTableRow>
       <StyledTableCell>{nombre}</StyledTableCell>
-      <StyledTableCell align="center">{existencia} Piezas</StyledTableCell>
-      <StyledTableCell align="center">$ {precio}</StyledTableCell>
+      <StyledTableCell align="center">{existencia}</StyledTableCell>
+      <StyledTableCell align="center">S/ {precio}</StyledTableCell>
       <StyledTableCell align="center"> {categoria.nombre}</StyledTableCell>
-      <StyledTableCell align="center"> {marca}</StyledTableCell>
+      <StyledTableCell align="center"> {presentacion}</StyledTableCell>
       <StyledTableCell align="center">
         <Button variant="contained" color="secondary" onClick={handleDelete}>
           <DeleteIcon />

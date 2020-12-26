@@ -48,10 +48,10 @@ export default function CustomTable(props) {
         <TableHead>
           <TableRow>
             <StyledTableCell align="left">Nombre</StyledTableCell>
-            <StyledTableCell align="center">Existencia</StyledTableCell>
+            <StyledTableCell align="center">Stock</StyledTableCell>
             <StyledTableCell align="center">Precio</StyledTableCell>
             <StyledTableCell align="center">Categoria</StyledTableCell>
-            <StyledTableCell align="center">Marca</StyledTableCell>
+            <StyledTableCell align="center">Talla</StyledTableCell>
             <StyledTableCell align="center">Eliminar</StyledTableCell>
             <StyledTableCell align="center">Editar</StyledTableCell>
           </TableRow>

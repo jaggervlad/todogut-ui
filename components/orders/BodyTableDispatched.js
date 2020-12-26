@@ -14,7 +14,7 @@ export default function BodyTableDispatched({ order }) {
       <StyledTableCell>{id.slice(5, 10)}</StyledTableCell>
       <StyledTableCell align="center">{nombre} </StyledTableCell>
       <StyledTableCell align="center">{direccion}</StyledTableCell>
-      <StyledTableCell align="center"> {total.toFixed(2)}</StyledTableCell>
+      <StyledTableCell align="center">S/ {total.toFixed(2)}</StyledTableCell>
       <StyledTableCell align="center">{estado}</StyledTableCell>
 
       {/* Ver */}

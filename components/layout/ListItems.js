@@ -6,11 +6,12 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import CardTravelIcon from '@material-ui/icons/CardTravel';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
+import GroupIcon from '@material-ui/icons/Group';
 import PersonIcon from '@material-ui/icons/Person';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import CategoryIcon from '@material-ui/icons/Category';
 import { useRouter } from 'next/router';
+import BarChartIcon from '@material-ui/icons/BarChart';
 
 export function MaintListItems() {
   const router = useRouter();
@@ -50,13 +51,6 @@ export function MaintListItems() {
         </ListItemIcon>
         <ListItemText primary="Categorias" />
       </ListItem>
-
-      <ListItem button onClick={() => router.push('/reports')}>
-        <ListItemIcon>
-          <BarChartIcon />
-        </ListItemIcon>
-        <ListItemText primary="Reportes" />
-      </ListItem>
     </div>
   );
 }
@@ -65,41 +59,27 @@ export const SecondaryListItems = () => {
   const router = useRouter();
   return (
     <div>
-      <ListSubheader inset>Opciones Avanzadas</ListSubheader>
+      <ListSubheader inset>Resultados</ListSubheader>
 
-      <ListItem button>
+      <ListItem button onClick={() => router.push('/indicadores')}>
         <ListItemIcon>
-          <AssignmentIcon />
+          <BarChartIcon />
         </ListItemIcon>
-        <ListItemText primary="Mes Actual" />
+        <ListItemText primary="Indicadores" />
       </ListItem>
 
-      <ListItem button>
+      <ListItem button onClick={() => router.push('/reports')}>
         <ListItemIcon>
           <AssignmentIcon />
         </ListItemIcon>
-        <ListItemText primary="Ultima quincena" />
-      </ListItem>
-
-      <ListItem button onClick={() => router.push('/recordusers')}>
-        <ListItemIcon>
-          <AssignmentIcon />
-        </ListItemIcon>
-        <ListItemText primary="Vendedores" />
-      </ListItem>
-
-      <ListItem button onClick={() => router.push('/recordclients')}>
-        <ListItemIcon>
-          <AssignmentIcon />
-        </ListItemIcon>
-        <ListItemText primary="Clientes" />
+        <ListItemText primary="Reportes" />
       </ListItem>
 
       <ListItem button onClick={() => router.push('/users')}>
         <ListItemIcon>
-          <AssignmentIcon />
+          <GroupIcon />
         </ListItemIcon>
-        <ListItemText primary="Lista de usuarios" />
+        <ListItemText primary="Usuarios" />
       </ListItem>
     </div>
   );

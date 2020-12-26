@@ -104,7 +104,7 @@ export default function NewProduct() {
                     <FormInput
                       type="number"
                       name="precio"
-                      label="$precio"
+                      label="Precio"
                       errorobj={errors}
                     />
                   </Grid>
@@ -112,7 +112,7 @@ export default function NewProduct() {
                     <FormInput
                       type="number"
                       name="existencia"
-                      label="#cantidad"
+                      label="Cantidad"
                       errorobj={errors}
                     />
                   </Grid>

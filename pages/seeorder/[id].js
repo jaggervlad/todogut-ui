@@ -128,19 +128,19 @@ export default function seeorder() {
 
                   {costEnv && (
                     <Typography variant="body1">
-                      Costo de Envio <span>$ {costEnv}</span>
+                      Costo de Envio <span>S/ {costEnv}</span>
                     </Typography>
                   )}
 
                   {descuento && (
                     <Typography variant="body1">
-                      Descuento <span>$ {descuento}</span>
+                      Descuento <span>S/ {descuento}</span>
                     </Typography>
                   )}
 
                   <Typography variant="h4" style={{ marginTop: '50px' }}>
                     Total a Pagar:{' '}
-                    <span style={{ fontSize: '25px' }}>$ {total}</span>
+                    <span style={{ fontSize: '25px' }}>S/ {total}</span>
                   </Typography>
 
                   <Typography variant="h4" style={{ marginTop: '50px' }}>

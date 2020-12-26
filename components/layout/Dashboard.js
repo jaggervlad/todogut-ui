@@ -22,6 +22,7 @@ import {
 import { useStyles } from '../../styles/makeStyles/dashboard';
 import { useRouter } from 'next/router';
 import { NotSignIn } from './AuthLayout';
+import Controls from '../controls/Controls';
 
 export default function Dashboard({ children, user }) {
   const router = useRouter();
@@ -62,10 +63,14 @@ export default function Dashboard({ children, user }) {
             noWrap
             className={classes.title}
           >
-            Welcome to the App - @{user?.username}
+            Bienvenido - @{user?.username}
           </Typography>
           <IconButton color="inherit" onClick={() => router.push('/signout')}>
-            <ExitToAppIcon />
+            <Controls.Button
+              color="secondary"
+              text="Cerrar Sesion"
+              size="small"
+            />
           </IconButton>
         </Toolbar>
       </AppBar>
