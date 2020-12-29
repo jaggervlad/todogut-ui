@@ -51,7 +51,7 @@ export default function AddProducts() {
           onChange={(opc) => selectProducts(opc)}
           getOptionValue={(opc) => opc.id}
           getOptionLabel={(opc) =>
-            `${opc.nombre}  |  Stock: ${opc.existencia} | Marca: ${opc.marca}`
+            `${opc.nombre}  |  Stock: ${opc.existencia} |  ${opc.presentacion}`
           }
           placeholder="Seleccionar Productos"
           noOptionsMessage={() => 'No hay Resultados'}

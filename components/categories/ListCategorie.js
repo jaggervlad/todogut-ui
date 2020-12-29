@@ -5,33 +5,37 @@ import { Title } from '../customs/Title';
 import Button from '@material-ui/core/Button';
 import { useRouter } from 'next/router';
 import AddIcon from '@material-ui/icons/Add';
-import CustomTable from './CustomTable';
-import Search from '../customs/Search';
 import { useQuery } from '@apollo/client';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Alert from '@material-ui/lab/Alert';
 import { ALL_CATEGORIES } from '@/graphql/categories';
 import { NewCategorie } from './NewCategorie';
+import CategorieTable from './CategorieTable';
+import SearchIcon from '@material-ui/icons/Search';
+import { InputAdornment, TextField } from '@material-ui/core';
 
 export default function ListCategorie() {
   const { data, loading, error } = useQuery(ALL_CATEGORIES);
-  const router = useRouter();
 
-  const [search, setSearch] = useState('');
   const [open, setOpen] = useState(false);
-  const searchRef = useRef();
+  const [filterFn, setFilterFn] = useState({
+    fn: (items) => {
+      return items;
+    },
+  });
 
-  const handleSearch = useCallback(() => {
-    setSearch(searchRef.current.value);
-  }, []);
-
-  function handleOpen() {
-    setOpen(true);
-  }
-
-  function handleClose() {
-    setOpen(false);
-  }
+  const handleSearch = (e) => {
+    let target = e.target;
+    setFilterFn({
+      fn: (items) => {
+        if (target.value == '') return items;
+        else
+          return items.filter((x) =>
+            x.nombre.toLowerCase().includes(target.value)
+          );
+      },
+    });
+  };
 
   return (
     <AuthLayout>
@@ -59,17 +63,31 @@ export default function ListCategorie() {
           </Grid>
 
           <Grid item>
-            <Search
-              search={search}
-              handleSearch={handleSearch}
-              searchRef={searchRef}
+            <TextField
+              onChange={handleSearch}
+              label="Buscar"
+              type="text"
+              variant="outlined"
+              margin="dense"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment>
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
           </Grid>
         </Grid>
 
         {loading && <CircularProgress />}
-        {error && <Alert severity="error">error.message</Alert>}
-        {data && <CustomTable rows={data.obtenerCategorias} search={search} />}
+        {error && <Alert severity="error">{error.message}</Alert>}
+        {data && (
+          <CategorieTable
+            categories={data.obtenerCategorias}
+            filterFn={filterFn}
+          />
+        )}
       </Grid>
     </AuthLayout>
   );

@@ -26,7 +26,6 @@ export default function EditCategorie(props) {
           setOpenPopup={setOpen}
         >
           <EditForm
-            open={open}
             setOpen={setOpen}
             id={id}
             actualizarCategoria={actualizarCategoria}

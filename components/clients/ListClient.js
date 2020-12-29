@@ -11,12 +11,14 @@ import { useQuery } from '@apollo/client';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Alert from '@material-ui/lab/Alert';
 import { ALL_CLIENTS } from '@/graphql/clients';
+import NewClient from './NewClient';
 
 export default function ListClient() {
   const { data, loading, error } = useQuery(ALL_CLIENTS);
   const router = useRouter();
 
   const [search, setSearch] = useState('');
+  const [open, setOpen] = useState(false);
   const searchRef = useRef();
 
   const handleSearch = useCallback(() => {
@@ -40,10 +42,11 @@ export default function ListClient() {
               variant="contained"
               color="primary"
               style={{ marginRight: '5px' }}
-              onClick={() => router.push('/newclient')}
+              onClick={() => setOpen(true)}
             >
               <AddIcon />
             </Button>
+            <NewClient open={open} setOpen={setOpen} />
           </Grid>
 
           <Grid item>

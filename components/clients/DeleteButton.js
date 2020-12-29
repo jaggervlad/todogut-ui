@@ -1,30 +1,28 @@
-import React from 'react';
 import { Button } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { useMutation } from '@apollo/client';
-import { ALL_CATEGORIES, DELETE_CATEGORIE } from '@/graphql/categories';
+import { Delete as DeleteIcon } from '@material-ui/icons';
+import React from 'react';
+import { ALL_CLIENTS, DELETE_CLIENT } from '@/graphql/clients';
 import Swal from 'sweetalert2';
+import { useMutation } from '@apollo/client';
 
-export default function DeleteButton(props) {
-  const { id } = props;
-  const [eliminarCategoria] = useMutation(DELETE_CATEGORIE, {
+export default function DeleteButton({ id }) {
+  const [eliminarCliente] = useMutation(DELETE_CLIENT, {
     update(cache) {
-      const { obtenerCategorias } = cache.readQuery({ query: ALL_CATEGORIES });
+      const { obtenerClientes } = cache.readQuery({ query: ALL_CLIENTS });
 
       cache.writeQuery({
-        query: ALL_CATEGORIES,
+        query: ALL_CLIENTS,
         data: {
-          obtenerCategorias: obtenerCategorias.filter(
+          obtenerClientes: obtenerClientes.filter(
             (current) => current.id !== id
           ),
         },
       });
     },
   });
-
   function handleDelete() {
     Swal.fire({
-      title: 'Deseas eliminar esta categoria?',
+      title: 'Deseas eliminar este cliente?',
       text: 'Esta acción no se puede deshacer',
       icon: 'warning',
       showCancelButton: true,
@@ -35,8 +33,8 @@ export default function DeleteButton(props) {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await eliminarCategoria({ variables: { id } });
-          Swal.fire('Correcto', 'Categoria eliminada', 'success');
+          await eliminarCliente({ variables: { id } });
+          Swal.fire('Correct', 'Cliente eliminado', 'success');
         } catch (error) {
           const errorMessage = error.message.replace('Graphql error: ', '');
           Swal.fire('Error', errorMessage, 'error');
@@ -45,12 +43,7 @@ export default function DeleteButton(props) {
     });
   }
   return (
-    <Button
-      variant="contained"
-      color="secondary"
-      onClick={handleDelete}
-      {...props}
-    >
+    <Button variant="contained" color="secondary" onClick={handleDelete}>
       <DeleteIcon />
     </Button>
   );
