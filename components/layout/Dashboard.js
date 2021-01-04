@@ -65,13 +65,13 @@ export default function Dashboard({ children, user }) {
           >
             Bienvenido - @{user?.username}
           </Typography>
-          <IconButton color="inherit" onClick={() => router.push('/signout')}>
-            <Controls.Button
-              color="secondary"
-              text="Cerrar Sesion"
-              size="small"
-            />
-          </IconButton>
+
+          <Controls.Button
+            color="secondary"
+            text="Cerrar Sesion"
+            size="small"
+            onClick={() => router.push('/signout')}
+          />
         </Toolbar>
       </AppBar>
       <Drawer

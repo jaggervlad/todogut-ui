@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyledTableCell } from '../table/StyledTableCell';
 import { StyledTableRow } from '../table/StyledTableRow';
 import Button from '@material-ui/core/Button';
@@ -11,12 +11,14 @@ import { useStatusChange } from '@/hooks/useStatusChange';
 import StatusChange from './StatusChange';
 import { handlePdf } from '@/utils/events/pdf';
 import { useDeleteOrder } from '@/hooks/useDeleteOrder';
+import AddPaidType from './AddPaidType';
 
 export default function BodyTable({ order }) {
   const products = order.pedido.map(({ __typename, ...product }) => product);
   const { id, total, cliente, estado, direccion } = order;
   const { nombre } = cliente;
   const { setStatus, status } = useStatusChange(estado);
+  const [open, setOpen] = useState(false);
   const { handleDelete } = useDeleteOrder(id);
   return (
     <StyledTableRow>
@@ -45,11 +47,10 @@ export default function BodyTable({ order }) {
 
       {/* Editar  */}
       <StyledTableCell align="center">
-        <Link href="/editorder/[id]" as={`/editorder/${id}`}>
-          <Button variant="contained">
-            <EditIcon />
-          </Button>
-        </Link>
+        <Button variant="contained" onClick={() => setOpen(true)}>
+          <EditIcon />
+        </Button>
+        <AddPaidType id={id} open={open} setOpen={setOpen} />
       </StyledTableCell>
 
       {/* Generar Pdf */}

@@ -7,37 +7,32 @@ import { FormProvider, useForm } from 'react-hook-form';
 import FormSelect from '../forms/FormSelect';
 import { ProductSchema } from 'validationSchemas/products';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { UPDATE_PRODUCT } from '@/graphql/products';
-import { useMutation } from '@apollo/client';
+import { ALL_CATEGORIES } from '@/graphql/categories';
+import { useQuery, useMutation } from '@apollo/client';
+import { ALL_PRODUCTS, NEW_PRODUCT } from '@/graphql/products';
 import Swal from 'sweetalert2';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-export default function EditForm(props) {
+export default function AddForm({ setOpen }) {
   const classes = useFormStyles();
-  const { id, categories, product, setOpen } = props;
-  const [actualizarProducto] = useMutation(UPDATE_PRODUCT);
-  const {
-    nombre,
-    existencia,
-    precio,
-    marca,
-    undMed,
-    categoria,
-    presentacion,
-  } = product;
-  const preload = {
-    nombre,
-    existencia,
-    precio,
-    marca,
-    undMed,
-    presentacion,
-    categoria: categoria.id,
-  };
   const methods = useForm({
-    defaultValues: preload,
     resolver: yupResolver(ProductSchema),
   });
+  const { data, loading } = useQuery(ALL_CATEGORIES);
+  const [nuevoProducto] = useMutation(NEW_PRODUCT, {
+    update(cache, { data: nuevoProducto }) {
+      const { allProducts } = cache.readQuery({
+        query: ALL_PRODUCTS,
+      });
 
+      cache.writeQuery({
+        query: ALL_PRODUCTS,
+        data: {
+          allProducts: [...allProducts, nuevoProducto],
+        },
+      });
+    },
+  });
   const { handleSubmit, formState, errors } = methods;
   const { isSubmitting } = formState;
 
@@ -49,17 +44,22 @@ export default function EditForm(props) {
     };
 
     try {
-      await actualizarProducto({
-        variables: { id, input },
+      await nuevoProducto({
+        variables: { input },
       });
 
       setOpen(false);
-      Swal.fire('Actulizado', 'Producto editado correctamente', 'success');
+      Swal.fire('Creado', 'Se creó producto correctamente', 'success');
     } catch (error) {
       const errorMsg = error.message.replace('Graphql error:', '');
       Swal.fire('Error', errorMsg, 'error');
     }
   }
+
+  const categoriesMap = data?.obtenerCategorias.map((item, i) => ({
+    id: item.id,
+    label: item.nombre,
+  }));
 
   return (
     <FormProvider {...methods}>
@@ -73,7 +73,7 @@ export default function EditForm(props) {
             <FormInput
               type="number"
               name="precio"
-              label="$precio"
+              label="Precio"
               errorobj={errors}
             />
           </Grid>
@@ -81,7 +81,7 @@ export default function EditForm(props) {
             <FormInput
               type="number"
               name="existencia"
-              label="#cantidad"
+              label="Cantidad"
               errorobj={errors}
             />
           </Grid>
@@ -96,12 +96,13 @@ export default function EditForm(props) {
               errorobj={errors}
             />
           </Grid>
-          {categories && (
+          {loading && <CircularProgress />}
+          {categoriesMap && (
             <Grid item xs={12}>
               <FormSelect
                 name="categoria"
                 label="categoria"
-                options={categories}
+                options={categoriesMap}
                 errorobj={errors}
               />
             </Grid>
@@ -127,7 +128,7 @@ export default function EditForm(props) {
           className={classes.submit}
           onClick={handleSubmit(onSubmit)}
         >
-          guardar cambios
+          crear
         </Button>
       </form>
     </FormProvider>

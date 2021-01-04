@@ -13,11 +13,13 @@ import Alert from '@material-ui/lab/Alert';
 import { ALL_ORDERS } from '@/graphql/orders';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
+import NewOrder from './NewOrder';
 export default function ListOrder() {
   const { data, loading, error } = useQuery(ALL_ORDERS);
   const router = useRouter();
 
   const [search, setSearch] = useState('');
+  const [open, setOpen] = useState(false);
   const searchRef = useRef();
 
   const handleSearch = useCallback(() => {
@@ -41,10 +43,11 @@ export default function ListOrder() {
               variant="contained"
               color="primary"
               style={{ marginRight: '5px' }}
-              onClick={() => router.push('/neworder')}
+              onClick={() => setOpen(true)}
             >
               <AddIcon />
             </Button>
+            <NewOrder open={open} setOpen={setOpen} />
 
             <Button
               variant="contained"

@@ -7,7 +7,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import Swal from 'sweetalert2';
 import { useMutation } from '@apollo/client';
 import { DELETE_PRODUCT, ALL_PRODUCTS } from '@/graphql/products';
-import Link from 'next/link';
+import EditProduct from './EditProduct';
+import EditButton from './EditButton';
 
 export default function BodyTable({ product }) {
   const { id, nombre, precio, existencia, categoria, presentacion } = product;
@@ -59,11 +60,7 @@ export default function BodyTable({ product }) {
         </Button>
       </StyledTableCell>
       <StyledTableCell align="center">
-        <Link href="/editproduct/[id]" as={`/editproduct/${id}`}>
-          <Button variant="contained" color="primary">
-            <EditIcon />
-          </Button>
-        </Link>
+        <EditButton id={id} />
       </StyledTableCell>
     </StyledTableRow>
   );
