@@ -56,7 +56,7 @@ export default function SignIn() {
     <Container component="main" maxWidth="xs">
       <div className={`${classes.paper} ${classes.marginTop}`}>
         <Typography component="h1" variant="h5">
-          Sign in
+          Inicia Sesión
         </Typography>
 
         <FormProvider {...methods}>
@@ -76,7 +76,7 @@ export default function SignIn() {
               className={classes.submit}
               onClick={handleSubmit(onSubmit)}
             >
-              login
+              ingresar
             </Button>
           </form>
         </FormProvider>

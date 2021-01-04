@@ -1,22 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useTable from '../table/useTable';
-import {
-  TableBody,
-  TableCell,
-  TableRow,
-  Button,
-  Toolbar,
-  TextField,
-  InputAdornment,
-  makeStyles,
-  Grid,
-} from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
-import SearchIcon from '@material-ui/icons/Search';
-import AddIcon from '@material-ui/icons/Add';
+import { TableBody, TableCell, TableRow } from '@material-ui/core';
 import DeleteButton from './DeleteButton';
-import EditCategorie from './EditCategorie';
-import { NewCategorie } from './NewCategorie';
 import EditButton from './EditButton';
 
 const headCells = [
