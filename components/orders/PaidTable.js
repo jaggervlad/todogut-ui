@@ -56,6 +56,7 @@ export default function PaidTable(props) {
             <StyledTableCell align="center">Total</StyledTableCell>
             <StyledTableCell align="center">Estado</StyledTableCell>
             <StyledTableCell align="center">Ver</StyledTableCell>
+            <StyledTableCell align="center">Imprimir</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

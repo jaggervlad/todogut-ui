@@ -25,12 +25,18 @@ export const DELETE_ORDER = gql`
 `;
 
 export const ORDERS_PAID = gql`
-  query pedidosPagados($offset: Int) {
-    pedidosPagados(offset: $offset) {
+  query pedidosPagados {
+    pedidosPagados {
       id
       cliente {
         id
         nombre
+      }
+      pedido {
+        id
+        cantidad
+        nombre
+        precio
       }
       direccion
       total
@@ -40,8 +46,8 @@ export const ORDERS_PAID = gql`
 `;
 
 export const ORDERS_DISPATCHED = gql`
-  query pedidosDespachados($offset: Int) {
-    pedidosDespachados(offset: $offset) {
+  query pedidosDespachados {
+    pedidosDespachados {
       id
       cliente {
         id
@@ -54,8 +60,8 @@ export const ORDERS_DISPATCHED = gql`
   }
 `;
 export const ALL_ORDERS = gql`
-  query obtenerPedidos($offset: Int) {
-    obtenerPedidos(offset: $offset) {
+  query obtenerPedidos {
+    obtenerPedidos {
       id
       cliente {
         nombre

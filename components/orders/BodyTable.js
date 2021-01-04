@@ -6,12 +6,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import PrintIcon from '@material-ui/icons/Print';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Swal from 'sweetalert2';
 import Link from 'next/link';
 import { useStatusChange } from '@/hooks/useStatusChange';
 import StatusChange from './StatusChange';
-import { useMutation } from '@apollo/client';
-import { ALL_ORDERS, DELETE_ORDER } from '@/graphql/orders';
 import { handlePdf } from '@/utils/events/pdf';
 import { useDeleteOrder } from '@/hooks/useDeleteOrder';
 
@@ -59,7 +56,7 @@ export default function BodyTable({ order }) {
       <StyledTableCell align="center">
         <Button
           variant="contained"
-          color="primary.secondary"
+          color="text"
           onClick={(e) => handlePdf(id, e)}
         >
           <PrintIcon />
